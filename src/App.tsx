@@ -14,7 +14,9 @@ export function App() {
 
     return <>
         <Provider value={client}>
-            {location && <Home lat={location.latitude} lon={location.longitude} />}
+            {location
+                ? <Home lat={location.latitude} lon={location.longitude} />
+                : <div className='bg-red-800 text-white'> sorry, you must allow location for this application </div>}
         </Provider>
     </>
 }
