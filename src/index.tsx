@@ -1,14 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
+import { StrictMode } from 'react'
 import { App } from './App'
 import { register } from './serviceWorkerRegistration'
 import './index.css'
 
-ReactDOM.render(
-    <React.StrictMode>
+createRoot(document.querySelector('#root')!).render(
+    <StrictMode>
         <App />
-    </React.StrictMode>,
-    document.getElementById('root')
+    </StrictMode>
 )
 
 register()
