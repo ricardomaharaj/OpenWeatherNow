@@ -73,8 +73,6 @@ export function Home({ lat, lon }: Props) {
     let hourly = data?.weather.hourly
     let daily = data?.weather.daily
 
-    document.querySelector('html')?.setAttribute('class', 'bg-black')
-
     if (fetching) return <Spinner />
     if (error) return <> {error.message} </>
 
