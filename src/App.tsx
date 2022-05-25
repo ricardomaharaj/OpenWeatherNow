@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { createClient, Provider as UrqlProvider } from 'urql'
 import { Home } from './Home'
 
-let url = 'http://localhost:4000/gql'
-if (process.env.NODE_ENV === 'production') { url = '/gql' }
+let url = process.env.NODE_ENV === 'production' ? 'https://r8r-gql.herokuapp.com/' : 'http://localhost:4000/'
+
 let urqlClient = createClient({ url })
 
 export function App() {
