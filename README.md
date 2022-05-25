@@ -1,7 +1,7 @@
-# OpenWeather Quickly
+# OpenWeatherNow
 
 basic frontend to the openweather onecall api
-currently mobile ui optimized only!
 
-see it live at:
-https://openweather-quickly.herokuapp.com/
+*only mobile ui optimized!*
+
+https://open-weather-now.netlify.app/

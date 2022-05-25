@@ -1,6 +1,6 @@
 {
-    "short_name": "OpenWeather Quickly",
-    "name": "OpenWeather Quickly",
+    "short_name": "OpenWeatherNow",
+    "name": "OpenWeatherNow",
     "icons": [
         {
             "src": "favicon.ico",
