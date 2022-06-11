@@ -69,7 +69,6 @@ export function Home({ lat, lon }: Props) {
     let { fetching, data, error } = res
 
     let current = data?.weather.current
-    let minutely = data?.weather.minutely?.filter(x => x.precipitation! > 0)
     let hourly = data?.weather.hourly
     let daily = data?.weather.daily
 
@@ -90,25 +89,10 @@ export function Home({ lat, lon }: Props) {
                     <div> {current?.temp?.toFixed(0)}&deg;C </div>
                 </div>
             </div>
-            {minutely?.length! >= 1 && <>
-                <div className='text-white'>Precipitation in the next hour:</div>
-                <div className='row space-x-2 overflow-scroll'>
-                    {minutely?.map((x, i) =>
-                        <div className={`rounded-xl p-2 bg-sky-400`} key={i}>
-                            <div className='row'>
-                                {`${TimeUtil.getHours(x.dt!)}:${TimeUtil.getMinutes(x.dt!).toString().padStart(2, '0')}`}
-                            </div>
-                            <div className='row'>
-                                {x?.precipitation!.toPrecision(2).padEnd(4, '0')}
-                            </div>
-                        </div>
-                    )}
-                </div>
-            </>}
             <div className='row space-x-2 overflow-scroll'>
                 {hourly?.map((x, i) =>
                     <div className={`rounded-xl p-2 ${IconThemeData[x?.weather?.at(0)?.icon!]}`} key={i}>
-                        <img className='max-w-fit' src={`${IMGURL}/${x?.weather?.at(0)?.icon}@2x.png`} alt='' />
+                        <img className='max-w-fit' src={`${IMGURL}/${x?.weather?.at(0)?.icon}.png`} alt='' />
                         <div className='row'>
                             {`${TimeUtil.getHours(x.dt!)} ${TimeUtil.getPostfix(x.dt!)}`}
                         </div>
@@ -154,7 +138,6 @@ export function Home({ lat, lon }: Props) {
                             </div>
                         </div>
                     </div>
-
                 )}
             </div>
         </div>
