@@ -1,5 +1,4 @@
 import { useWeatherQuery } from './gql'
-import { Spinner } from './Spinner'
 
 const IMGURL = 'https://openweathermap.org/img/wn/'
 
@@ -62,24 +61,24 @@ const IconThemeData: any = {
     '50n': 'bg-slate-500', // mist
 }
 
-interface Props { lat: number, lon: number }
-export function Home({ lat, lon }: Props) {
+interface HomeProps { lat: number, lon: number }
+export function Home({ lat, lon }: HomeProps) {
 
     let [res,] = useWeatherQuery({ lat, lon })
     let { fetching, data, error } = res
+
+    if (fetching) return <div className='spinner' />
+    if (error) return <> {error.message} </>
 
     let current = data?.weather.current
     let hourly = data?.weather.hourly
     let daily = data?.weather.daily
 
-    if (fetching) return <Spinner />
-    if (error) return <> {error.message} </>
-
     return <>
-        <div className='container mx-auto space-y-4'>
+        <div className='col mx-auto xl:mx-96 space-y-2'>
             <div className={`row rounded-xl p-3 justify-around ${IconThemeData[current?.weather?.at(0)?.icon!]}`}>
                 <div className='col'>
-                    <img className=' w-14' src={`${IMGURL}/${current?.weather?.at(0)?.icon}@2x.png`} alt='' />
+                    <img className='w-14' src={`${IMGURL}/${current?.weather?.at(0)?.icon}@2x.png`} alt='' />
                 </div>
                 <div className='col text-center text-lg'>
                     <div> {current?.weather?.at(0)?.main} </div>

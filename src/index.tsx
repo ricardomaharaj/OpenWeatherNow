@@ -1,8 +1,8 @@
 import { createRoot } from 'react-dom/client'
 import { App } from './App'
-import { register } from './serviceWorkerRegistration'
-import './index.css'
+import { registerSW } from './SWRegister'
+import './style.css'
 
 createRoot(document.querySelector('#root')!).render(<App />)
 
-register()
+registerSW()

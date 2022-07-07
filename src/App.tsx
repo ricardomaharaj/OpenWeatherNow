@@ -8,17 +8,26 @@ let urqlClient = createClient({ url })
 
 export function App() {
 
-    document.querySelector('html')?.setAttribute('class', 'bg-black')
-
     let [location, setLocation] = useState<GeolocationCoordinates>()
 
-    useEffect(() => { navigator.geolocation.getCurrentPosition(x => setLocation(x.coords)) }, [])
+    let askForLocation = () => { navigator.geolocation.getCurrentPosition(x => setLocation(x.coords)) }
+
+    useEffect(() => {
+        navigator.permissions.query({ name: 'geolocation' }).then((x) => { if (x.state === 'granted') { askForLocation() } })
+    }, [])
 
     return <>
         <UrqlProvider value={urqlClient}>
             {location
                 ? <Home lat={location.latitude} lon={location.longitude} />
-                : <div className='bg-red-800 text-white'> sorry, you must allow location for this application </div>}
+                : <>
+                    <div className='container mx-auto space-y-2'>
+                        <div className='bg-red-800 rounded-xl p-2 text-white'> sorry, you must allow location for this application </div>
+                        <div className='row justify-center'>
+                            <button onClick={askForLocation} className='bg-green-800 text-white rounded-xl p-2'> ALLOW LOCATION </button>
+                        </div>
+                    </div>
+                </>}
         </UrqlProvider>
     </>
 }
