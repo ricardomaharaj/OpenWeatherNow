@@ -22,7 +22,7 @@ export function App() {
                 ? <Home lat={location.latitude} lon={location.longitude} />
                 : <>
                     <div className='container mx-auto space-y-2'>
-                        <div className='bg-red-800 rounded-xl p-2 text-white'> sorry, you must allow location for this application </div>
+                        <div className='bg-red-800 rounded-xl p-2 text-white'> location is required for this application </div>
                         <div className='row justify-center'>
                             <button onClick={askForLocation} className='bg-green-800 text-white rounded-xl p-2'> ALLOW LOCATION </button>
                         </div>

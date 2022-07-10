@@ -2,20 +2,14 @@ import { useWeatherQuery } from './gql'
 
 const IMGURL = 'https://openweathermap.org/img/wn/'
 
-const DAYS = [
-    'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
-]
+const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 const TimeUtil = {
     getHours(time: number) {
         let date = new Date(time * 1000)
         let hours = date.getHours()
-        if (hours > 12) {
-            hours = (hours - 12)
-        }
-        if (hours === 0) {
-            hours = 12
-        }
+        if (hours > 12) { hours = (hours - 12) }
+        if (hours === 0) { hours = 12 }
         return hours
     },
     getMinutes(time: number) {
@@ -25,9 +19,7 @@ const TimeUtil = {
     getPostfix(time: number) {
         let postfix = 'AM'
         let date = new Date(time * 1000)
-        if (date.getHours() > 12) {
-            postfix = 'PM'
-        }
+        if (date.getHours() > 12) { postfix = 'PM' }
         return postfix
     },
     getDay(time: number) {
@@ -42,23 +34,23 @@ const IconThemeData: any = {
     // DAY
     '01d': 'bg-yellow-300', // clear sky
     '02d': 'bg-yellow-200', // few clouds
-    '03d': 'bg-slate-300', // scattered clouds
-    '04d': 'bg-slate-400', // broken clouds
-    '09d': 'bg-sky-400', // shower rain
-    '10d': 'bg-blue-400', // rain
+    '03d': 'bg-slate-300',  // scattered clouds
+    '04d': 'bg-slate-400',  // broken clouds
+    '09d': 'bg-sky-400',    // shower rain
+    '10d': 'bg-blue-400',   // rain
     '11d': 'bg-purple-300', // thunderstorm
-    '13d': 'bg-slate-200', // snow
-    '50d': 'bg-slate-500', // mist
+    '13d': 'bg-slate-200',  // snow
+    '50d': 'bg-slate-500',  // mist
     // NIGHT
-    '01n': 'bg-slate-300', // clear sky
-    '02n': 'bg-slate-400', // few clouds
-    '03n': 'bg-slate-400', // scattered clouds
-    '04n': 'bg-slate-400', // broken clouds
-    '09n': 'bg-sky-400', // shower rain
-    '10n': 'bg-blue-400', // rain
+    '01n': 'bg-slate-300',  // clear sky
+    '02n': 'bg-slate-400',  // few clouds
+    '03n': 'bg-slate-400',  // scattered clouds
+    '04n': 'bg-slate-400',  // broken clouds
+    '09n': 'bg-sky-400',    // shower rain
+    '10n': 'bg-blue-400',   // rain
     '11n': 'bg-purple-300', // thunderstorm
-    '13n': 'bg-slate-200', // snow
-    '50n': 'bg-slate-500', // mist
+    '13n': 'bg-slate-200',  // snow
+    '50n': 'bg-slate-500',  // mist
 }
 
 interface HomeProps { lat: number, lon: number }
