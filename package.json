@@ -1,7 +1,10 @@
 {
-    "name": "openweathernow",
+    "name": "open-weather-now",
     "version": "0",
-    "private": true,
+    "scripts": {
+        "dev": "react-scripts start",
+        "build": "react-scripts build"
+    },
     "dependencies": {
         "autoprefixer": "10.4.7",
         "graphql": "16.5.0",
@@ -11,7 +14,7 @@
         "react-scripts": "5.0.1",
         "tailwindcss": "3.1.6",
         "typescript": "4.7.4",
-        "urql": "2.2.2",
+        "urql": "2.2.3",
         "workbox-background-sync": "6.5.3",
         "workbox-broadcast-update": "6.5.3",
         "workbox-cacheable-response": "6.5.3",
@@ -26,13 +29,9 @@
         "workbox-streams": "6.5.3"
     },
     "devDependencies": {
-        "@types/node": "18.0.4",
+        "@types/node": "18.0.6",
         "@types/react": "18.0.15",
         "@types/react-dom": "18.0.6"
-    },
-    "scripts": {
-        "dev": "react-scripts start",
-        "build": "react-scripts build"
     },
     "browserslist": {
         "production": [
