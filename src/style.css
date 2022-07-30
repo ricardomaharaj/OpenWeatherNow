@@ -9,15 +9,15 @@
 }
 
 body {
-    @apply bg-black text-black m-2
+    @apply bg-black text-black m-2;
 }
 
 .row {
-    @apply flex flex-row
+    @apply flex flex-row;
 }
 
 .col {
-    @apply flex flex-col
+    @apply flex flex-col;
 }
 
 /* Spinner */
@@ -30,7 +30,7 @@ body {
 }
 
 .spinner:after {
-    content: " ";
+    content: ' ';
     display: block;
     width: 64px;
     height: 64px;
