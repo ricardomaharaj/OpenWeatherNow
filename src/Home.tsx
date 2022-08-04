@@ -118,7 +118,7 @@ export function Home({ lat, lon }: HomeProps) {
                                 )} ${TimeUtil.getPostfix(x.dt!)}`}
                             </div>
                             <div className='row'>
-                                {x?.temp?.toFixed(0)}&deg;C
+                                {`${x?.temp?.toFixed(0)}°C`}
                             </div>
                         </div>
                     ))}
@@ -140,51 +140,54 @@ export function Home({ lat, lon }: HomeProps) {
                                     alt=''
                                 />
                                 <div className=''>
-                                    {TimeUtil.getDay(x.dt!)}
-                                    {TimeUtil.getDayOfMonth(x.dt!)}
+                                    {`${TimeUtil.getDay(
+                                        x.dt!
+                                    )} ${TimeUtil.getDayOfMonth(x.dt!)}`}
                                 </div>
                             </div>
                             <div className='col space-y-2 justify-evenly'>
                                 <div className='row space-x-2 justify-evenly'>
                                     <div className='col'>
-                                        <div> High </div>
+                                        <div>High</div>
                                         <div>
-                                            {x.temp?.max?.toFixed(0)}&deg;C
+                                            {`${x.temp?.max?.toFixed(0)}°C`}
                                         </div>
                                     </div>
                                     <div className='col'>
-                                        <div> Low </div>
+                                        <div>Low</div>
                                         <div>
-                                            {x.temp?.min?.toFixed(0)}&deg;C
+                                            {`${x.temp?.min?.toFixed(0)}°C`}
                                         </div>
                                     </div>
                                 </div>
                                 <div className='row space-x-2 justify-evenly'>
                                     <div className='col text-center'>
-                                        <div> Morning </div>
+                                        <div>Morning</div>
                                         <div>
-                                            {x.feels_like?.morn?.toFixed(0)}
-                                            &deg;C
+                                            {`${x.feels_like?.morn?.toFixed(
+                                                0
+                                            )}°C`}
                                         </div>
                                     </div>
                                     <div className='col text-center'>
-                                        <div> Day </div>
+                                        <div>Day</div>
                                         <div>
                                             {x.feels_like?.day?.toFixed(0)}
                                             &deg;C
                                         </div>
                                     </div>
                                     <div className='col text-center'>
-                                        <div> Evening </div>
+                                        <div>Evening</div>
                                         <div>
-                                            {x.feels_like?.eve?.toFixed(0)}
-                                            &deg;C
+                                            {`${x.feels_like?.eve?.toFixed(
+                                                0
+                                            )}°C`}
                                         </div>
                                     </div>
                                     <div className='col text-center'>
-                                        <div> Night </div>
+                                        <div>Night</div>
                                         <div>
-                                            {x.temp?.night?.toFixed(0)}&deg;C
+                                            {`${x.temp?.night?.toFixed(0)}°C`}
                                         </div>
                                     </div>
                                 </div>
