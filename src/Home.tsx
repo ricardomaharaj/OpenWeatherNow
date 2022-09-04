@@ -67,8 +67,31 @@ export function Home({ lat, lon }: HomeProps) {
     let [res] = useWeatherQuery({ lat, lon })
     let { fetching, data, error } = res
 
-    if (fetching) return <div className='spinner' />
-    if (error) return <> {error.message} </>
+    const load_silhouette = (
+        <div className='col mx-auto xl:mx-96 space-y-2'>
+            <div className='bg-slate-900 rounded-xl h-[80px]' />
+            <div className='row overflow-scroll space-x-2'>
+                <div className='bg-slate-900 rounded-xl w-[66px] h-[114px]' />
+                <div className='bg-slate-900 rounded-xl w-[66px] h-[114px]' />
+                <div className='bg-slate-900 rounded-xl w-[66px] h-[114px]' />
+                <div className='bg-slate-900 rounded-xl w-[66px] h-[114px]' />
+                <div className='bg-slate-900 rounded-xl w-[66px] h-[114px]' />
+            </div>
+            <div className='bg-slate-900 rounded-xl w-full h-[140px]' />
+            <div className='bg-slate-900 rounded-xl w-full h-[140px]' />
+            <div className='bg-slate-900 rounded-xl w-full h-[140px]' />
+            <div className='bg-slate-900 rounded-xl w-full h-[140px]' />
+            <div className='bg-slate-900 rounded-xl w-full h-[140px]' />
+        </div>
+    )
+
+    if (fetching) return load_silhouette
+    if (error)
+        return (
+            <div className='bg-red-800 rounded-xl p-2 text-white'>
+                {error.message}
+            </div>
+        )
 
     let current = data?.weather.current
     let hourly = data?.weather.hourly
