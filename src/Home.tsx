@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import { useWeatherQuery } from './gql'
 
 const IMGURL = 'https://openweathermap.org/img/wn/'
@@ -71,17 +72,21 @@ export function Home({ lat, lon }: HomeProps) {
         <div className='col mx-auto xl:mx-96 space-y-2'>
             <div className='bg-slate-900 rounded-xl h-[80px]' />
             <div className='row overflow-scroll space-x-2'>
-                <div className='bg-slate-900 rounded-xl w-[66px] h-[114px]' />
-                <div className='bg-slate-900 rounded-xl w-[66px] h-[114px]' />
-                <div className='bg-slate-900 rounded-xl w-[66px] h-[114px]' />
-                <div className='bg-slate-900 rounded-xl w-[66px] h-[114px]' />
-                <div className='bg-slate-900 rounded-xl w-[66px] h-[114px]' />
+                {new Array(9)
+                    .fill(
+                        <div className='bg-slate-900 rounded-xl w-[66px] h-[114px]' />
+                    )
+                    .map((x, i) => (
+                        <Fragment key={i}>{x}</Fragment>
+                    ))}
             </div>
-            <div className='bg-slate-900 rounded-xl w-full h-[140px]' />
-            <div className='bg-slate-900 rounded-xl w-full h-[140px]' />
-            <div className='bg-slate-900 rounded-xl w-full h-[140px]' />
-            <div className='bg-slate-900 rounded-xl w-full h-[140px]' />
-            <div className='bg-slate-900 rounded-xl w-full h-[140px]' />
+            {new Array(9)
+                .fill(
+                    <div className='bg-slate-900 rounded-xl w-full h-[140px]' />
+                )
+                .map((x, i) => (
+                    <Fragment key={i}>{x}</Fragment>
+                ))}
         </div>
     )
 
