@@ -27,11 +27,14 @@ export function App() {
     return (
         <>
             <UrqlProvider value={urqlClient}>
-                {location ? (
-                    <Home lat={location.latitude} lon={location.longitude} />
-                ) : (
-                    <>
-                        <div className='container mx-auto space-y-2'>
+                <div className='container mx-auto space-y-2'>
+                    {location ? (
+                        <Home
+                            lat={location.latitude}
+                            lon={location.longitude}
+                        />
+                    ) : (
+                        <>
                             <div className='bg-red-800 rounded-xl p-2 text-white'>
                                 location is required for this application
                             </div>
@@ -43,9 +46,9 @@ export function App() {
                                     ALLOW LOCATION
                                 </button>
                             </div>
-                        </div>
-                    </>
-                )}
+                        </>
+                    )}
+                </div>
             </UrqlProvider>
         </>
     )

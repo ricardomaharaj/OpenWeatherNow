@@ -69,25 +69,25 @@ export function Home({ lat, lon }: HomeProps) {
     let { fetching, data, error } = res
 
     const load_silhouette = (
-        <div className='col mx-auto xl:mx-96 space-y-2'>
+        <>
             <div className='bg-slate-900 rounded-xl h-[80px]' />
             <div className='row overflow-scroll space-x-2'>
-                {new Array(9)
+                {new Array(6)
                     .fill(
-                        <div className='bg-slate-900 rounded-xl w-[66px] h-[114px]' />
+                        <div className='bg-slate-900 p-2 rounded-xl w-[66px] h-[114px]' />
                     )
                     .map((x, i) => (
                         <Fragment key={i}>{x}</Fragment>
                     ))}
             </div>
-            {new Array(9)
+            {new Array(6)
                 .fill(
                     <div className='bg-slate-900 rounded-xl w-full h-[140px]' />
                 )
                 .map((x, i) => (
                     <Fragment key={i}>{x}</Fragment>
                 ))}
-        </div>
+        </>
     )
 
     if (fetching) return load_silhouette
@@ -104,125 +104,114 @@ export function Home({ lat, lon }: HomeProps) {
 
     return (
         <>
-            <div className='col mx-auto xl:mx-96 space-y-2'>
-                <div
-                    className={`row rounded-xl p-3 justify-around ${
-                        IconThemeData[current?.weather?.at(0)?.icon!]
-                    }`}
-                >
-                    <div className='col'>
+            {load_silhouette}
+            <div
+                className={`row rounded-xl p-3 justify-around ${
+                    IconThemeData[current?.weather?.at(0)?.icon!]
+                }`}
+            >
+                <div className='col'>
+                    <img
+                        className='w-14'
+                        src={`${IMGURL}/${
+                            current?.weather?.at(0)?.icon
+                        }@2x.png`}
+                        alt=''
+                    />
+                </div>
+                <div className='col text-center text-lg'>
+                    <div> {current?.weather?.at(0)?.main} </div>
+                    <div> {current?.weather?.at(0)?.description} </div>
+                </div>
+                <div className='col self-center text-xl'>
+                    <div> {current?.temp?.toFixed(0)}&deg;C </div>
+                </div>
+            </div>
+            <div className='row space-x-2 overflow-scroll'>
+                {hourly?.map((x, i) => (
+                    <div
+                        className={`rounded-xl p-2 ${
+                            IconThemeData[x?.weather?.at(0)?.icon!]
+                        }`}
+                        key={i}
+                    >
                         <img
-                            className='w-14'
-                            src={`${IMGURL}/${
-                                current?.weather?.at(0)?.icon
-                            }@2x.png`}
+                            className='max-w-fit'
+                            src={`${IMGURL}/${x?.weather?.at(0)?.icon}.png`}
                             alt=''
                         />
+                        <div className='row'>
+                            {`${TimeUtil.getHours(x.dt!)} ${TimeUtil.getPostfix(
+                                x.dt!
+                            )}`}
+                        </div>
+                        <div className='row'>{`${x?.temp?.toFixed(0)}°C`}</div>
                     </div>
-                    <div className='col text-center text-lg'>
-                        <div> {current?.weather?.at(0)?.main} </div>
-                        <div> {current?.weather?.at(0)?.description} </div>
-                    </div>
-                    <div className='col self-center text-xl'>
-                        <div> {current?.temp?.toFixed(0)}&deg;C </div>
-                    </div>
-                </div>
-                <div className='row space-x-2 overflow-scroll'>
-                    {hourly?.map((x, i) => (
-                        <div
-                            className={`rounded-xl p-2 ${
-                                IconThemeData[x?.weather?.at(0)?.icon!]
-                            }`}
-                            key={i}
-                        >
+                ))}
+            </div>
+            <div className='col space-y-2'>
+                {daily?.map((x, i) => (
+                    <div
+                        className={`row justify-evenly rounded-xl p-2 ${
+                            IconThemeData[x.weather?.at(0)?.icon!]
+                        }`}
+                        key={i}
+                    >
+                        <div className='col text-center'>
                             <img
                                 className='max-w-fit'
-                                src={`${IMGURL}/${x?.weather?.at(0)?.icon}.png`}
+                                src={`${IMGURL}/${
+                                    x.weather?.at(0)?.icon
+                                }@2x.png`}
                                 alt=''
                             />
-                            <div className='row'>
-                                {`${TimeUtil.getHours(
+                            <div className=''>
+                                {`${TimeUtil.getDay(
                                     x.dt!
-                                )} ${TimeUtil.getPostfix(x.dt!)}`}
-                            </div>
-                            <div className='row'>
-                                {`${x?.temp?.toFixed(0)}°C`}
+                                )} ${TimeUtil.getDayOfMonth(x.dt!)}`}
                             </div>
                         </div>
-                    ))}
-                </div>
-                <div className='col space-y-2'>
-                    {daily?.map((x, i) => (
-                        <div
-                            className={`row justify-evenly rounded-xl p-2 ${
-                                IconThemeData[x.weather?.at(0)?.icon!]
-                            }`}
-                            key={i}
-                        >
-                            <div className='col text-center'>
-                                <img
-                                    className='max-w-fit'
-                                    src={`${IMGURL}/${
-                                        x.weather?.at(0)?.icon
-                                    }@2x.png`}
-                                    alt=''
-                                />
-                                <div className=''>
-                                    {`${TimeUtil.getDay(
-                                        x.dt!
-                                    )} ${TimeUtil.getDayOfMonth(x.dt!)}`}
+                        <div className='col space-y-2 justify-evenly'>
+                            <div className='row space-x-2 justify-evenly'>
+                                <div className='col'>
+                                    <div>High</div>
+                                    <div>{`${x.temp?.max?.toFixed(0)}°C`}</div>
+                                </div>
+                                <div className='col'>
+                                    <div>Low</div>
+                                    <div>{`${x.temp?.min?.toFixed(0)}°C`}</div>
                                 </div>
                             </div>
-                            <div className='col space-y-2 justify-evenly'>
-                                <div className='row space-x-2 justify-evenly'>
-                                    <div className='col'>
-                                        <div>High</div>
-                                        <div>
-                                            {`${x.temp?.max?.toFixed(0)}°C`}
-                                        </div>
-                                    </div>
-                                    <div className='col'>
-                                        <div>Low</div>
-                                        <div>
-                                            {`${x.temp?.min?.toFixed(0)}°C`}
-                                        </div>
+                            <div className='row space-x-2 justify-evenly'>
+                                <div className='col text-center'>
+                                    <div>Morning</div>
+                                    <div>
+                                        {`${x.feels_like?.morn?.toFixed(0)}°C`}
                                     </div>
                                 </div>
-                                <div className='row space-x-2 justify-evenly'>
-                                    <div className='col text-center'>
-                                        <div>Morning</div>
-                                        <div>
-                                            {`${x.feels_like?.morn?.toFixed(
-                                                0
-                                            )}°C`}
-                                        </div>
+                                <div className='col text-center'>
+                                    <div>Day</div>
+                                    <div>
+                                        {x.feels_like?.day?.toFixed(0)}
+                                        &deg;C
                                     </div>
-                                    <div className='col text-center'>
-                                        <div>Day</div>
-                                        <div>
-                                            {x.feels_like?.day?.toFixed(0)}
-                                            &deg;C
-                                        </div>
+                                </div>
+                                <div className='col text-center'>
+                                    <div>Evening</div>
+                                    <div>
+                                        {`${x.feels_like?.eve?.toFixed(0)}°C`}
                                     </div>
-                                    <div className='col text-center'>
-                                        <div>Evening</div>
-                                        <div>
-                                            {`${x.feels_like?.eve?.toFixed(
-                                                0
-                                            )}°C`}
-                                        </div>
-                                    </div>
-                                    <div className='col text-center'>
-                                        <div>Night</div>
-                                        <div>
-                                            {`${x.temp?.night?.toFixed(0)}°C`}
-                                        </div>
+                                </div>
+                                <div className='col text-center'>
+                                    <div>Night</div>
+                                    <div>
+                                        {`${x.temp?.night?.toFixed(0)}°C`}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
             </div>
         </>
     )
