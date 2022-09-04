@@ -104,7 +104,6 @@ export function Home({ lat, lon }: HomeProps) {
 
     return (
         <>
-            {load_silhouette}
             <div
                 className={`row rounded-xl p-3 justify-around ${
                     IconThemeData[current?.weather?.at(0)?.icon!]
