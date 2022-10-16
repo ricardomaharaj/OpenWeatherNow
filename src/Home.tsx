@@ -64,6 +64,7 @@ interface HomeProps {
     lat: number
     lon: number
 }
+
 export function Home({ lat, lon }: HomeProps) {
     let [res] = useWeatherQuery({ lat, lon })
     let { fetching, data, error } = res
