@@ -107,13 +107,18 @@ interface Weather {
     ]
 }
 
-export function useWeatherQuery(args: { lat: number; lon: number }) {
+interface WeatherQueryVariables {
+    lat: number
+    lon: number
+}
+
+export function useWeatherQuery(variables: WeatherQueryVariables) {
     return useQuery<{ weather: Weather }>({
         query: gql`
             query ($lat: Float, $lon: Float) {
                 weather(lat: $lat, lon: $lon)
             }
         `,
-        variables: args
+        variables
     })
 }
