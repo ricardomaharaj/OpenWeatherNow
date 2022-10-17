@@ -65,7 +65,7 @@ interface HomeProps {
     lon: number
 }
 
-export function Home({ lat, lon }: HomeProps) {
+export function Weather({ lat, lon }: HomeProps) {
     let [res] = useWeatherQuery({ lat, lon })
     let { fetching, data, error } = res
 

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { createClient, Provider as UrqlProvider } from 'urql'
-import { Home } from './Home'
+import { Weather } from './Weather'
 
 let url =
     process.env.NODE_ENV === 'production'
@@ -12,14 +12,16 @@ let urqlClient = createClient({ url })
 export function App() {
     let [location, setLocation] = useState<GeolocationCoordinates>()
 
-    navigator.geolocation.getCurrentPosition((x) => setLocation(x.coords))
+    navigator.geolocation.getCurrentPosition(({ coords }) =>
+        setLocation(coords)
+    )
 
     return (
         <>
             <UrqlProvider value={urqlClient}>
                 <div className='container mx-auto space-y-2'>
                     {location && (
-                        <Home
+                        <Weather
                             lat={location.latitude}
                             lon={location.longitude}
                         />
