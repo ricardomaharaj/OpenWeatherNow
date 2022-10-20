@@ -1,4 +1,3 @@
-import { Fragment } from 'react'
 import { useWeatherQuery } from './gql'
 
 const IMGURL = 'https://openweathermap.org/img/wn/'
@@ -39,25 +38,25 @@ const TimeUtil = {
 
 const IconThemeData: any = {
     // DAY
-    '01d': 'bg-yellow-300', // clear sky
-    '02d': 'bg-yellow-200', // few clouds
-    '03d': 'bg-slate-300', // scattered clouds
-    '04d': 'bg-slate-400', // broken clouds
-    '09d': 'bg-sky-400', // shower rain
-    '10d': 'bg-blue-400', // rain
-    '11d': 'bg-purple-300', // thunderstorm
-    '13d': 'bg-slate-200', // snow
-    '50d': 'bg-slate-500', // mist
+    '01d': 'bg-yellow-300   ', // clear sky
+    '02d': 'bg-yellow-200   ', // few clouds
+    '03d': 'bg-slate-300 ', // scattered clouds
+    '04d': 'bg-slate-400 ', // broken clouds
+    '09d': 'bg-sky-400      ', // shower rain
+    '10d': 'bg-blue-400     ', // rain
+    '11d': 'bg-purple-300   ', // thunderstorm
+    '13d': 'bg-slate-200 ', // snow
+    '50d': 'bg-slate-500 ', // mist
     // NIGHT
-    '01n': 'bg-slate-300', // clear sky
-    '02n': 'bg-slate-400', // few clouds
-    '03n': 'bg-slate-400', // scattered clouds
-    '04n': 'bg-slate-400', // broken clouds
-    '09n': 'bg-sky-400', // shower rain
-    '10n': 'bg-blue-400', // rain
-    '11n': 'bg-purple-300', // thunderstorm
-    '13n': 'bg-slate-200', // snow
-    '50n': 'bg-slate-500' // mist
+    '01n': 'bg-slate-300 ', // clear sky
+    '02n': 'bg-slate-400 ', // few clouds
+    '03n': 'bg-slate-400 ', // scattered clouds
+    '04n': 'bg-slate-400 ', // broken clouds
+    '09n': 'bg-sky-400      ', // shower rain
+    '10n': 'bg-blue-400     ', // rain
+    '11n': 'bg-purple-300   ', // thunderstorm
+    '13n': 'bg-slate-200 ', // snow
+    '50n': 'bg-slate-500 ' // mist
 }
 
 interface HomeProps {
@@ -69,29 +68,7 @@ export function Weather({ lat, lon }: HomeProps) {
     let [res] = useWeatherQuery({ lat, lon })
     let { fetching, data, error } = res
 
-    const load_silhouette = (
-        <>
-            <div className='bg-slate-900 rounded-xl h-[80px]' />
-            <div className='row overflow-scroll space-x-2'>
-                {new Array(6)
-                    .fill(
-                        <div className='bg-slate-900 p-2 rounded-xl w-[66px] h-[114px]' />
-                    )
-                    .map((x, i) => (
-                        <Fragment key={i}>{x}</Fragment>
-                    ))}
-            </div>
-            {new Array(6)
-                .fill(
-                    <div className='bg-slate-900 rounded-xl w-full h-[140px]' />
-                )
-                .map((x, i) => (
-                    <Fragment key={i}>{x}</Fragment>
-                ))}
-        </>
-    )
-
-    if (fetching) return load_silhouette
+    if (fetching) return <div>loading...</div>
     if (error)
         return (
             <div className='bg-red-800 rounded-xl p-2 text-white'>
@@ -106,28 +83,26 @@ export function Weather({ lat, lon }: HomeProps) {
     return (
         <>
             <div
-                className={`row rounded-xl p-3 justify-around ${
+                className={`flex flex-row rounded-xl p-3 justify-around ${
                     IconThemeData[current?.weather?.at(0)?.icon!]
                 }`}
             >
-                <div className='col'>
+                <div className='flex flex-col'>
                     <img
+                        src={`${IMGURL}${current?.weather?.at(0)?.icon}@2x.png`}
                         className='w-14'
-                        src={`${IMGURL}/${
-                            current?.weather?.at(0)?.icon
-                        }@2x.png`}
                         alt=''
                     />
                 </div>
-                <div className='col text-center text-lg'>
+                <div className='flex flex-col text-center text-lg'>
                     <div> {current?.weather?.at(0)?.main} </div>
                     <div> {current?.weather?.at(0)?.description} </div>
                 </div>
-                <div className='col self-center text-xl'>
+                <div className='flex flex-col self-center text-xl'>
                     <div> {current?.temp?.toFixed(0)}&deg;C </div>
                 </div>
             </div>
-            <div className='row space-x-2 overflow-scroll'>
+            <div className='flex flex-row space-x-2 overflow-scroll'>
                 {hourly?.map((x, i) => (
                     <div
                         className={`rounded-xl p-2 ${
@@ -136,73 +111,74 @@ export function Weather({ lat, lon }: HomeProps) {
                         key={i}
                     >
                         <img
+                            src={`${IMGURL}${x?.weather?.at(0)?.icon}.png`}
                             className='max-w-fit'
-                            src={`${IMGURL}/${x?.weather?.at(0)?.icon}.png`}
                             alt=''
                         />
-                        <div className='row'>
+                        <div className='flex flex-row'>
                             {`${TimeUtil.getHours(x.dt!)} ${TimeUtil.getPostfix(
                                 x.dt!
                             )}`}
                         </div>
-                        <div className='row'>{`${x?.temp?.toFixed(0)}°C`}</div>
+                        <div className='flex flex-row'>{`${x?.temp?.toFixed(
+                            0
+                        )}°C`}</div>
                     </div>
                 ))}
             </div>
-            <div className='col space-y-2'>
+            <div className='flex flex-col space-y-2'>
                 {daily?.map((x, i) => (
                     <div
-                        className={`row justify-evenly rounded-xl p-2 ${
+                        className={`flex flex-row justify-evenly rounded-xl p-2 ${
                             IconThemeData[x.weather?.at(0)?.icon!]
                         }`}
                         key={i}
                     >
-                        <div className='col text-center'>
+                        <div className='flex flex-col text-center'>
                             <img
-                                className='max-w-fit'
-                                src={`${IMGURL}/${
+                                src={`${IMGURL}${
                                     x.weather?.at(0)?.icon
                                 }@2x.png`}
                                 alt=''
                             />
-                            <div className=''>
+                            <div>
                                 {`${TimeUtil.getDay(
                                     x.dt!
                                 )} ${TimeUtil.getDayOfMonth(x.dt!)}`}
                             </div>
                         </div>
-                        <div className='col space-y-2 justify-evenly'>
-                            <div className='row space-x-2 justify-evenly'>
-                                <div className='col'>
+                        <div className='flex flex-col space-y-2 justify-evenly'>
+                            <div className='flex flex-row space-x-2 justify-evenly'>
+                                <div className='flex flex-col'>
                                     <div>High</div>
                                     <div>{`${x.temp?.max?.toFixed(0)}°C`}</div>
                                 </div>
-                                <div className='col'>
+                                <div className='flex flex-col'>
                                     <div>Low</div>
                                     <div>{`${x.temp?.min?.toFixed(0)}°C`}</div>
                                 </div>
                             </div>
-                            <div className='row space-x-2 justify-evenly'>
-                                <div className='col text-center'>
+                            <div className='flex flex-row space-x-2 justify-evenly'>
+                                <div className='flex flex-col text-center'>
                                     <div>Morning</div>
                                     <div>
                                         {`${x.feels_like?.morn?.toFixed(0)}°C`}
                                     </div>
                                 </div>
-                                <div className='col text-center'>
+                                <div className='flex flex-col text-center'>
                                     <div>Day</div>
                                     <div>
                                         {x.feels_like?.day?.toFixed(0)}
                                         &deg;C
                                     </div>
                                 </div>
-                                <div className='col text-center'>
+                                <div className='flex flex-col text-center'>
                                     <div>Evening</div>
                                     <div>
                                         {`${x.feels_like?.eve?.toFixed(0)}°C`}
                                     </div>
                                 </div>
-                                <div className='col text-center'>
+                                <div className='flex flex-col text-center'>
                                     <div>Night</div>
                                     <div>
                                         {`${x.temp?.night?.toFixed(0)}°C`}
