@@ -9,13 +9,5 @@
 }
 
 body {
-    @apply bg-black text-black m-2;
-}
-
-.row {
-    @apply flex flex-row;
-}
-
-.col {
-    @apply flex flex-col;
+    @apply bg-black text-black;
 }
