@@ -19,7 +19,7 @@ export function App() {
     return (
         <>
             <UrqlProvider value={urqlClient}>
-                <div className='container mx-auto space-y-2 p-2'>
+                <div className='container mx-auto max-w-md space-y-2 p-2'>
                     {location && (
                         <Weather
                             lat={location.latitude}
