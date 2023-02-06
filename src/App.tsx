@@ -1,33 +1,30 @@
-import { useState } from 'react'
-import { createClient, Provider as UrqlProvider } from 'urql'
-import { Weather } from './Weather'
+import { useEffect } from 'react'
+import { createClient as createUrql, Provider as UrqlProvider } from 'urql'
+import { Weather } from './comps/weather'
+import { useLocation } from './hooks/location'
 
-let url =
-    process.env.NODE_ENV === 'production'
-        ? 'https://r8r-gql.herokuapp.com/'
-        : 'http://localhost:4000/'
+const url =
+  process.env.NODE_ENV === 'production'
+    ? 'https://r8r-gql.herokuapp.com/'
+    : 'http://localhost:4000/'
 
-let urqlClient = createClient({ url })
+const urqlClient = createUrql({ url })
 
 export function App() {
-    let [location, setLocation] = useState<GeolocationCoordinates>()
+  const { location, askForLocation, error } = useLocation()
 
-    navigator.geolocation.getCurrentPosition(({ coords }) =>
-        setLocation(coords)
-    )
+  useEffect(() => {
+    askForLocation()
+  }, [])
 
-    return (
-        <>
-            <UrqlProvider value={urqlClient}>
-                <div className='container mx-auto max-w-md space-y-2 p-2'>
-                    {location && (
-                        <Weather
-                            lat={location.latitude}
-                            lon={location.longitude}
-                        />
-                    )}
-                </div>
-            </UrqlProvider>
-        </>
-    )
+  return (
+    <>
+      <UrqlProvider value={urqlClient}>
+        {error && <div className='err'>{error}</div>}
+        {location && (
+          <Weather lat={location.latitude} lon={location.longitude} />
+        )}
+      </UrqlProvider>
+    </>
+  )
 }
