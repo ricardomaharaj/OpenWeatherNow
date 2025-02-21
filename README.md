@@ -1,13 +1,12 @@
-# OpenWeatherNow
+# OpenWeather Now
 
-A simple weather app
+A minimal weather app
 
 ### Features
 
-- Quick loading / request caching
-- Tailwind styled UI with contextual colors based on the weather
-- PWA for installation on mobile and seamless updates
+- PWA: instant in browser install, mobile devices install, seamless updating
+- Contextual colored UI based on the weather
 
-Available now at https://open-weather-now.netlify.app/
+Available now at https://open-weather-now.vercel.app/
 
-<img src='.gh/ow-now-home.png' width='250'>
+<img src='.gh/ow-now.png' width='250'>

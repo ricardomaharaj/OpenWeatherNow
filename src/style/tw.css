@@ -1,0 +1,13 @@
+@import 'tailwindcss';
+
+html {
+  @apply bg-black;
+}
+
+body {
+  @apply p-2;
+}
+
+img {
+  @apply max-h-fit max-w-fit;
+}

@@ -1,2 +1,17 @@
 node_modules
+
+.next
 dist
+out
+
+public/sw.js
+public/workbox*.js
+
+.env
+
+npm*
+yarn*
+pnpm*
+bun*
+
+tmp
